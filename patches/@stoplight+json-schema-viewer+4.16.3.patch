@@ -1,0 +1,35 @@
+diff --git a/node_modules/@stoplight/json-schema-viewer/index.js b/node_modules/@stoplight/json-schema-viewer/index.js
+index 1234567..abcdefg 100644
+--- a/node_modules/@stoplight/json-schema-viewer/index.js
++++ b/node_modules/@stoplight/json-schema-viewer/index.js
+@@ -658,10 +658,11 @@ const useHasProperties = ({ required, deprecated, validations: { readOnly, writ
+ const Properties = ({ required, deprecated, validations: { readOnly, writeOnly }, }) => {
+     const { viewMode } = useJSVOptionsContext();
+     const showVisibilityValidations = viewMode === 'standalone' && !!readOnly !== !!writeOnly;
+-    const visibility = showVisibilityValidations ? (readOnly ? (React__namespace.createElement(mosaic.Box, { as: "span", ml: 2, color: "muted", "data-test": "property-read-only" }, "read-only")) : (React__namespace.createElement(mosaic.Box, { as: "span", ml: 2, color: "muted", "data-test": "property-write-only" }, "write-only"))) : null;
++    const t = (key) => typeof i18n === 'function' ? i18n(key) : key;
++    const visibility = showVisibilityValidations ? (readOnly ? (React__namespace.createElement(mosaic.Box, { as: "span", ml: 2, color: "muted", "data-test": "property-read-only" }, t('sl_ReadOnly'))) : (React__namespace.createElement(mosaic.Box, { as: "span", ml: 2, color: "muted", "data-test": "property-write-only" }, "write-only"))) : null;
+     return (React__namespace.createElement(React__namespace.Fragment, null,
+         deprecated ? (React__namespace.createElement(mosaic.Box, { as: "span", ml: 2, color: "warning", "data-test": "property-deprecated" }, "deprecated")) : null,
+         visibility,
+-        required && (React__namespace.createElement(mosaic.Box, { as: "span", ml: 2, color: "warning", "data-test": "property-required" }, "required"))));
++        required && (React__namespace.createElement(mosaic.Box, { as: "span", ml: 2, color: "warning", "data-test": "property-required" }, t('sl_Required')))));
+ };
+
+diff --git a/node_modules/@stoplight/json-schema-viewer/index.mjs b/node_modules/@stoplight/json-schema-viewer/index.mjs
+index 7890123..fedcba9 100644
+--- a/node_modules/@stoplight/json-schema-viewer/index.mjs
++++ b/node_modules/@stoplight/json-schema-viewer/index.mjs
+@@ -637,10 +637,11 @@ const useHasProperties = ({ required, deprecated, validations: { readOnly, writ
+ const Properties = ({ required, deprecated, validations: { readOnly, writeOnly }, }) => {
+     const { viewMode } = useJSVOptionsContext();
+     const showVisibilityValidations = viewMode === 'standalone' && !!readOnly !== !!writeOnly;
+-    const visibility = showVisibilityValidations ? (readOnly ? (React.createElement(Box, { as: "span", ml: 2, color: "muted", "data-test": "property-read-only" }, "read-only")) : (React.createElement(Box, { as: "span", ml: 2, color: "muted", "data-test": "property-write-only" }, "write-only"))) : null;
++    const t = (key) => typeof i18n === 'function' ? i18n(key) : key;
++    const visibility = showVisibilityValidations ? (readOnly ? (React.createElement(Box, { as: "span", ml: 2, color: "muted", "data-test": "property-read-only" }, t('sl_ReadOnly'))) : (React.createElement(Box, { as: "span", ml: 2, color: "muted", "data-test": "property-write-only" }, "write-only"))) : null;
+     return (React.createElement(React.Fragment, null,
+         deprecated ? (React.createElement(Box, { as: "span", ml: 2, color: "warning", "data-test": "property-deprecated" }, "deprecated")) : null,
+         visibility,
+-        required && (React.createElement(Box, { as: "span", ml: 2, color: "warning", "data-test": "property-required" }, "required"))));
++        required && (React.createElement(Box, { as: "span", ml: 2, color: "warning", "data-test": "property-required" }, t('sl_Required')))));
+ };
