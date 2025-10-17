@@ -4,6 +4,7 @@ import React from 'react';
 
 import { OptionalSecurityMessage } from '../../../constants';
 import { useOptionsCtx } from '../../../context/Options';
+import { t } from '../../../utils/i18n';
 import { getReadableSecurityNames, getSecurityGroupId, shouldAddKey } from '../../../utils/oas/security';
 import { PanelContent } from '../Security/PanelContent';
 
@@ -27,7 +28,7 @@ export const SecuritySchemes: React.FC<SecuritySchemesProps> = ({
     <Panel rounded isCollapsible={defaultCollapsed} data-test="security-row">
       <Panel.Titlebar bg="canvas-300">
         <Box as="span" role="heading">
-          Security
+          {t('sl_Security')}
         </Box>
       </Panel.Titlebar>
       <Panel.Content p={0}>

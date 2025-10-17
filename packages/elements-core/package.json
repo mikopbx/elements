@@ -21,6 +21,10 @@
     ".": {
       "require": "./dist/index.js",
       "import": "./dist/index.mjs"
+    },
+    "./utils/i18n": {
+      "require": "./dist/utils/i18n.js",
+      "import": "./dist/utils/i18n.mjs"
     }
   },
   "files": [

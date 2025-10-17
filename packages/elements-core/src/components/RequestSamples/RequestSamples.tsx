@@ -6,6 +6,7 @@ import { atom, useAtom } from 'jotai';
 import { cloneDeep, find, findKey } from 'lodash';
 import React, { memo, useEffect, useMemo, useState } from 'react';
 
+import { t } from '../../utils/i18n';
 import { persistAtom } from '../../utils/jotai/persistAtom';
 import { convertRequestToSample } from './convertRequestToSample';
 import { CodeSample } from './extractCodeSamples';
@@ -46,8 +47,6 @@ type LanguageConfigWithCode = LanguageConfig &
 
 const selectedLanguageAtom = persistAtom<string>('RequestSamples_selectedLanguage', atom('shell'));
 const selectedLibraryAtom = persistAtom<string>('RequestSamples_selectedLibrary', atom('curl'));
-
-const fallbackText = 'Unable to generate code example';
 
 /**
  * Generates program code that makes the HTTP call specified by `request`.
@@ -191,12 +190,12 @@ export const RequestSamples = memo<RequestSamplesProps>(({ request, embeddedInMd
           })
           .catch(() => {
             if (!isStale) {
-              setRequestSample(fallbackText);
+              setRequestSample(t('sl_UnableToGenerateCode'));
             }
           });
       }
     } else {
-      setRequestSample(fallbackText);
+      setRequestSample(t('sl_UnableToGenerateCode'));
     }
 
     return () => {
@@ -209,12 +208,12 @@ export const RequestSamples = memo<RequestSamplesProps>(({ request, embeddedInMd
       <Panel.Titlebar rightComponent={<CopyButton size="sm" copyValue={requestSample || ''} />}>
         <Box ml={-2}>
           <Menu
-            aria-label="Request Sample Language"
+            aria-label={t('sl_RequestSampleLanguage')}
             closeOnPress
             items={menuItems}
             renderTrigger={({ isOpen }) => (
               <Button size="sm" iconRight="chevron-down" appearance="minimal" active={isOpen}>
-                Request Sample: {selectedSampleConfig.displayText}
+                {t('sl_RequestSample', { languageName: selectedSampleConfig.displayText })}
               </Button>
             )}
           />

@@ -7,6 +7,7 @@ import * as React from 'react';
 
 import { MockingContext } from '../../../containers/MockingProvider';
 import { useOptionsCtx } from '../../../context/Options';
+import { t } from '../../../utils/i18n';
 import { isProperUrl } from '../../../utils/guards';
 import { getServersToDisplay } from '../../../utils/http-spec/IServer';
 
@@ -34,7 +35,7 @@ export const ServerInfo: React.FC<ServerInfoProps> = ({ servers, mockUrl }) => {
   return (
     <InvertTheme>
       <Panel rounded isCollapsible={false} className="BaseURLContent" w="full" data-test="servers">
-        <Panel.Titlebar whitespace="nowrap">API Base URL</Panel.Titlebar>
+        <Panel.Titlebar whitespace="nowrap">{t('sl_APIBaseURL')}</Panel.Titlebar>
         <Panel.Content w="full" className="sl-flex sl-flex-col">
           <VStack spacing={1} divider>
             {serversToDisplay.map((server, index) => (
@@ -102,12 +103,12 @@ const ServerUrl: React.FC<IServer & { hasAnyServerVariables: boolean; defaultIsO
         >
           {!hasCopied && (
             <Box p={1} onClick={handleCopyClick} cursor="pointer">
-              Copy Server URL <Icon className="sl-ml-1" icon={['fas', 'copy']} />
+              {t('sl_CopyServerURL')} <Icon className="sl-ml-1" icon={['fas', 'copy']} />
             </Box>
           )}
           {hasCopied && (
             <Box p={1}>
-              Copied Server URL <Icon className="sl-ml-1" icon={['fas', 'check']} />
+              {t('sl_CopiedServerURL')} <Icon className="sl-ml-1" icon={['fas', 'check']} />
             </Box>
           )}
         </Tooltip>

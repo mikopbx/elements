@@ -3,6 +3,7 @@ import { IHttpService } from '@stoplight/types';
 import React from 'react';
 
 import { useOptionsCtx } from '../../../context/Options';
+import { t } from '../../../utils/i18n';
 import { MarkdownViewer } from '../../MarkdownViewer';
 
 interface AdditionalInfoProps {
@@ -46,7 +47,7 @@ export const AdditionalInfo: React.FC<AdditionalInfoProps> = ({ id, termsOfServi
   return contactLink || licenseLink || tosLink ? (
     <Panel rounded isCollapsible={false} pos="relative">
       <Panel.Titlebar bg="canvas-300">
-        <span role="heading">Additional Information</span>
+        <span role="heading">{t('sl_AdditionalInformation')}</span>
       </Panel.Titlebar>
 
       <Panel.Content p={0}>

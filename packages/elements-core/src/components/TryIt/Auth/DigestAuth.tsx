@@ -1,6 +1,8 @@
 import { Panel, Text } from '@stoplight/mosaic';
 import * as React from 'react';
 
+import { t } from '../../../utils/i18n';
+
 interface DigestAuthProps {
   onChange: (value: string) => void;
   value: string;
@@ -20,11 +22,11 @@ const digestPlaceholder = `Digest username="User Name",
 export const DigestAuth: React.FC<DigestAuthProps> = ({ onChange, value }) => {
   return (
     <Panel.Content className="ParameterGrid" data-test="auth-try-it-row">
-      <div>Authorization</div>
+      <div>{t('sl_Authorization')}</div>
       <Text mx={3}>:</Text>
       <textarea
         className="sl-relative sl-z-10 sl-w-full sl-text-base sl-bg-canvas-100 sl-p-1 sl-pr-2.5 sl-pl-2.5 sl-rounded sl-border-transparent hover:sl-border-input focus:sl-border-primary sl-border"
-        aria-label="Authorization"
+        aria-label={t('sl_Authorization')}
         placeholder={digestPlaceholder}
         value={value}
         onChange={e => onChange(e.currentTarget.value)}

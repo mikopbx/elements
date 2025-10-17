@@ -1,6 +1,8 @@
 import { Flex, Input, Panel, Text } from '@stoplight/mosaic';
 import * as React from 'react';
 
+import { t } from '../../../utils/i18n';
+
 interface BasicAuthProps {
   onChange: (value: string) => void;
   value: string;
@@ -15,30 +17,30 @@ export const BasicAuth: React.FC<BasicAuthProps> = ({ onChange, value }) => {
 
   return (
     <Panel.Content className="ParameterGrid" data-test="auth-try-it-row">
-      <div>Username</div>
+      <div>{t('sl_Username')}</div>
       <Text mx={3}>:</Text>
       <Flex flex={1}>
         <Input
           style={{ paddingLeft: 15 }}
-          aria-label="Username"
+          aria-label={t('sl_Username')}
           appearance="minimal"
           flex={1}
-          placeholder="username"
+          placeholder={t('sl_username')}
           value={username}
           type="text"
           required
           onChange={e => onCredentialsChange(e.currentTarget.value, password)}
         />
       </Flex>
-      <div>Password</div>
+      <div>{t('sl_Password')}</div>
       <Text mx={3}>:</Text>
       <Flex flex={1}>
         <Input
           style={{ paddingLeft: 15 }}
-          aria-label="Password"
+          aria-label={t('sl_Password')}
           appearance="minimal"
           flex={1}
-          placeholder="password"
+          placeholder={t('sl_password')}
           value={password}
           type="password"
           required

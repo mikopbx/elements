@@ -3,6 +3,8 @@ import { Box, Flex, NodeAnnotation, Select, VStack } from '@stoplight/mosaic';
 import { IHttpOperationRequestBody } from '@stoplight/types';
 import * as React from 'react';
 
+import { t } from '../../../utils/i18n';
+
 import { useSchemaInlineRefResolver } from '../../../context/InlineRefResolver';
 import { useOptionsCtx } from '../../../context/Options';
 import { isJSONSchema } from '../../../utils/guards';
@@ -43,11 +45,11 @@ export const Body = ({ body, onChange, isHttpWebhookOperation = false }: BodyPro
 
   return (
     <VStack spacing={6}>
-      <SectionSubtitle title="Body" id="request-body">
+      <SectionSubtitle title={t('sl_Body')} id="request-body">
         {contents.length > 0 && (
           <Flex flex={1} justify="end">
             <Select
-              aria-label="Request Body Content Type"
+              aria-label={t('sl_RequestBodyContentType')}
               value={String(chosenContent)}
               onChange={value => setChosenContent(parseInt(String(value), 10))}
               options={contents.map((content, index) => ({ label: content.mediaType, value: index }))}

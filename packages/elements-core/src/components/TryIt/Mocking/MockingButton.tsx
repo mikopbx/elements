@@ -3,6 +3,7 @@ import { IHttpOperation, IHttpOperationResponse } from '@stoplight/types';
 import { uniq } from 'lodash';
 import * as React from 'react';
 
+import { t } from '../../../utils/i18n';
 import { MockingOptions } from './mocking-utils';
 
 interface MockingButtonProps {
@@ -47,7 +48,7 @@ export const MockingButton: React.FC<MockingButtonProps> = ({
       const generationModeItems: MenuActionItem[] = [
         {
           id: `${menuId}-gen-static`,
-          title: 'Statically Generated',
+          title: t('sl_StaticallyGenerated'),
           isChecked: isActive && dynamic === false,
           onPress: () => {
             setMockingOptions({ code: operationResponse.code, dynamic: false });
@@ -55,7 +56,7 @@ export const MockingButton: React.FC<MockingButtonProps> = ({
         },
         {
           id: `${menuId}-gen-dynamic`,
-          title: 'Dynamically Generated',
+          title: t('sl_DynamicallyGenerated'),
           isChecked: isActive && dynamic === true,
           onPress: () => {
             setMockingOptions({ code: operationResponse.code, dynamic: true });
@@ -72,7 +73,7 @@ export const MockingButton: React.FC<MockingButtonProps> = ({
         },
         children: [
           { type: 'group', children: generationModeItems },
-          { type: 'group', title: 'Examples', children: exampleChildren },
+          { type: 'group', title: t('sl_Examples'), children: exampleChildren },
         ],
       };
 
@@ -85,11 +86,11 @@ export const MockingButton: React.FC<MockingButtonProps> = ({
   return (
     <Box>
       <Menu
-        aria-label="Mock settings"
+        aria-label={t('sl_MockSettings')}
         items={menuItems}
         renderTrigger={({ isOpen }) => (
           <FieldButton active={isOpen} size="sm">
-            Mock Settings
+            {t('sl_MockSettings')}
           </FieldButton>
         )}
       />

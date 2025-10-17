@@ -12,6 +12,7 @@ import {
   withStyles,
 } from '@stoplight/elements-core';
 import { ExtensionAddonRenderer } from '@stoplight/elements-core/components/Docs';
+import { t } from '@stoplight/elements-core/utils/i18n';
 import { Box, Flex, Icon } from '@stoplight/mosaic';
 import { flow } from 'lodash';
 import * as React from 'react';
@@ -178,8 +179,8 @@ export const APIImpl: React.FC<APIProps> = props => {
     return (
       <Flex justify="center" alignItems="center" w="full" minH="screen">
         <NonIdealState
-          title="Document could not be loaded"
-          description="The API description document could not be fetched. This could indicate connectivity problems, or issues with the server hosting the spec."
+          title={t('sl_DocumentLoadError')}
+          description={t('sl_DocumentLoadErrorDesc')}
           icon="exclamation-triangle"
         />
       </Flex>
@@ -198,8 +199,8 @@ export const APIImpl: React.FC<APIProps> = props => {
     return (
       <Flex justify="center" alignItems="center" w="full" minH="screen">
         <NonIdealState
-          title="Failed to parse OpenAPI file"
-          description="Please make sure your OpenAPI file is valid and try again"
+          title={t('sl_ParseError')}
+          description={t('sl_ParseErrorDesc')}
         />
       </Flex>
     );

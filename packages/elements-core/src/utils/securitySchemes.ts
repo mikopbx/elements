@@ -14,6 +14,7 @@ import {
   isOauth2ClientCredentialsOrPasswordFlow,
   isOAuth2ImplicitFlow,
 } from './oas/security';
+import { t } from './i18n';
 
 const oauthFlowNames: Record<keyof IOauthFlowObjects, string> = {
   implicit: 'Implicit',
@@ -62,7 +63,7 @@ function getBasicAuthDescription(schema: IBasicSecurityScheme) {
 }
 
 function getBearerAuthDescription(schema: IBearerSecurityScheme) {
-  return `Provide your bearer token in the Authorization header when making requests to protected resources.
+  return `${t('sl_ProvideBearerToken')}
 
   Example: \`Authorization: Bearer 123\`${getSecuritySchemeRoles(schema)}`;
 }

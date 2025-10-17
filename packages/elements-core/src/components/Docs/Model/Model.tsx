@@ -9,6 +9,7 @@ import * as React from 'react';
 import { useResolvedObject, useSchemaInlineRefResolver } from '../../../context/InlineRefResolver';
 import { useOptionsCtx } from '../../../context/Options';
 import { useIsCompact } from '../../../hooks/useIsCompact';
+import { t } from '../../../utils/i18n';
 import { exceedsSize, generateExamplesFromJsonSchema } from '../../../utils/exampleGeneration/exampleGeneration';
 import { getOriginalObject } from '../../../utils/ref-resolving/resolvedObject';
 import { LoadMore } from '../../LoadMore';
@@ -120,12 +121,12 @@ const ModelExamples = React.memo(({ data, isCollapsible = false }: { data: JSONS
 
   const examplesSelect = examples.length > 1 && (
     <Select
-      aria-label="Example"
+      aria-label={t('sl_Example')}
       value={String(chosenExampleIndex)}
       options={examples.map(({ label }, index) => ({ value: index, label }))}
       onChange={value => setChosenExampleIndex(parseInt(String(value), 10))}
       size="sm"
-      triggerTextPrefix="Example: "
+      triggerTextPrefix={t('sl_ExampleWith', { exampleName: '' })}
     />
   );
 
@@ -134,7 +135,7 @@ const ModelExamples = React.memo(({ data, isCollapsible = false }: { data: JSONS
       <Panel.Titlebar rightComponent={selectedExample ? <CopyButton size="sm" copyValue={selectedExample} /> : null}>
         {examplesSelect || (
           <Text color="body" role="heading">
-            Example
+            {t('sl_Example')}
           </Text>
         )}
       </Panel.Titlebar>

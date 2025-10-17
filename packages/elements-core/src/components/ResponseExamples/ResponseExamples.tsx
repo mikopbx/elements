@@ -3,6 +3,7 @@ import { CodeViewer } from '@stoplight/mosaic-code-viewer';
 import { IHttpEndpointOperation, IMediaTypeContent } from '@stoplight/types';
 import * as React from 'react';
 
+import { t } from '../../utils/i18n';
 import { exceedsSize, useGenerateExampleFromMediaTypeContent } from '../../utils/exampleGeneration/exampleGeneration';
 import { LoadMore } from '../LoadMore';
 
@@ -39,19 +40,19 @@ export const ResponseExamples = ({ httpOperation, responseMediaType, responseSta
 
   const examplesSelect = userDefinedExamples && userDefinedExamples.length > 1 && (
     <Select
-      aria-label="Response Example"
+      aria-label={t('sl_ResponseExample')}
       value={String(chosenExampleIndex)}
       options={userDefinedExamples.map((example, index) => ({ value: index, label: example.key }))}
       onChange={value => setChosenExampleIndex(parseInt(String(value), 10))}
       size="sm"
-      triggerTextPrefix="Response Example: "
+      triggerTextPrefix={t('sl_ResponseExampleWith', { exampleName: '' })}
     />
   );
 
   return (
     <Panel rounded isCollapsible={false}>
       <Panel.Titlebar rightComponent={<CopyButton size="sm" copyValue={responseExample || ''} />}>
-        {examplesSelect || <Text color="body">Response Example</Text>}
+        {examplesSelect || <Text color="body">{t('sl_ResponseExample')}</Text>}
       </Panel.Titlebar>
       <Panel.Content p={0}>
         {show || !exceedsSize(responseExample) ? (

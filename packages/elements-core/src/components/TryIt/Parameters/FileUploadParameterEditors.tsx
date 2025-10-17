@@ -2,6 +2,7 @@ import { Flex, Icon, Input, Text } from '@stoplight/mosaic';
 import * as React from 'react';
 
 import { useUniqueId } from '../../../hooks/useUniqueId';
+import { t } from '../../../utils/i18n';
 import { ParameterSpec } from './parameter-utils';
 
 interface FileUploadParameterEditorProps {
@@ -39,20 +40,20 @@ export const FileUploadParameterEditor: React.FC<FileUploadParameterEditorProps>
           aria-label={parameter.name}
           appearance="minimal"
           flex={1}
-          placeholder="pick a file"
+          placeholder={t('sl_pickFile')}
           type="text"
           required
           value={value?.name ?? ''}
           disabled
         />
         {value && (
-          <button className="sl-mr-3 sl-p-2" aria-label="Remove file" onClick={clearFile}>
+          <button className="sl-mr-3 sl-p-2" aria-label={t('sl_RemoveFile')} onClick={clearFile}>
             <Icon icon="times" />
           </button>
         )}
         <div>
           <label role="button" htmlFor={fileUploadInputId}>
-            Upload
+            {t('sl_Upload')}
           </label>
           <input onChange={handleFileChange} type="file" hidden id={fileUploadInputId} />
         </div>

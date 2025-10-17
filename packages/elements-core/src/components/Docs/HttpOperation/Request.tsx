@@ -4,6 +4,8 @@ import { useAtom } from 'jotai';
 import { atomWithStorage } from 'jotai/utils';
 import * as React from 'react';
 
+import { t } from '../../../utils/i18n';
+
 import { operation } from '../../../__fixtures__/operations/simple-get';
 import { OptionalSecurityMessage } from '../../../constants';
 import { useOptionsCtx } from '../../../context/Options';
@@ -52,34 +54,34 @@ export const Request: React.FunctionComponent<IRequestProps> = ({
 
   return (
     <VStack spacing={8}>
-      <SectionTitle title="Request" />
+      <SectionTitle title={t('sl_Request')} />
 
       {hideSecurityInfo ? null : <SecuritySchemes schemes={securitySchemes} parentId={operation.id} />}
 
       {pathParams.length > 0 && (
         <VStack spacing={5}>
-          <SectionSubtitle title="Path Parameters" />
+          <SectionSubtitle title={t('sl_PathParameters')} />
           <Parameters parameterType="path" parameters={pathParams} />
         </VStack>
       )}
 
       {queryParams.length > 0 && (
         <VStack spacing={5}>
-          <SectionSubtitle title="Query Parameters" />
+          <SectionSubtitle title={t('sl_QueryParameters')} />
           <Parameters parameterType="query" parameters={queryParams} />
         </VStack>
       )}
 
       {headerParams.length > 0 && (
         <VStack spacing={5}>
-          <SectionSubtitle title="Headers" id="request-headers" />
+          <SectionSubtitle title={t('sl_Headers')} id="request-headers" />
           <Parameters parameterType="header" parameters={headerParams} />
         </VStack>
       )}
 
       {cookieParams.length > 0 && (
         <VStack spacing={5}>
-          <SectionSubtitle title="Cookies" id="request-cookies" />
+          <SectionSubtitle title={t('sl_Cookies')} id="request-cookies" />
           <Parameters parameterType="cookie" parameters={cookieParams} />
         </VStack>
       )}

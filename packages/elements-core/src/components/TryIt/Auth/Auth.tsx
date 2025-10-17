@@ -2,6 +2,7 @@ import { Button, Menu, MenuItems, Panel } from '@stoplight/mosaic';
 import { HttpSecurityScheme } from '@stoplight/types';
 import * as React from 'react';
 
+import { t } from '../../../utils/i18n';
 import { getReadableSecurityName, getReadableSecurityNames, shouldAddKey } from '../../../utils/oas/security';
 import { APIKeyAuth } from './APIKeyAuth';
 import { createUndefinedValuedSchemes, HttpSecuritySchemeWithValues } from './authentication-utils';
@@ -78,7 +79,7 @@ export const TryItAuth: React.FC<TryItAuthProps> = ({
     const items: MenuItems = [
       {
         type: 'group',
-        title: 'Security Schemes',
+        title: t('sl_SecuritySchemes'),
         children: filteredSecurityItems.map(auth =>
           createMenuChild(
             getReadableSecurityNames(auth, shouldAddKey(auth, operationSecuritySchemes)),
@@ -112,7 +113,7 @@ export const TryItAuth: React.FC<TryItAuthProps> = ({
           )
         }
       >
-        Auth
+        {t('sl_Auth')}
       </Panel.Titlebar>
       {operationAuthValue && operationAuthValue.length > 0 ? (
         operationAuthValue.map(scheme => (
@@ -131,11 +132,11 @@ export const TryItAuth: React.FC<TryItAuthProps> = ({
 };
 
 const GenericMessageContainer: React.FC<{ scheme: HttpSecurityScheme }> = ({ scheme }) => {
-  return <Panel.Content data-test="auth-try-it-row">Coming Soon: {getReadableSecurityName(scheme)}</Panel.Content>;
+  return <Panel.Content data-test="auth-try-it-row">{t('sl_ComingSoon', { schemeName: getReadableSecurityName(scheme) })}</Panel.Content>;
 };
 
 const OptionalMessageContainer: React.FC = () => {
-  return <Panel.Content>No auth selected</Panel.Content>;
+  return <Panel.Content>{t('sl_NoAuthSelected')}</Panel.Content>;
 };
 
 interface SecuritySchemeComponentProps {

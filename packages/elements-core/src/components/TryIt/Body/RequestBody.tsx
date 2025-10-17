@@ -4,6 +4,8 @@ import { CodeEditor } from '@stoplight/mosaic-code-editor';
 import { INodeExample, INodeExternalExample } from '@stoplight/types';
 import * as React from 'react';
 
+import { t } from '../../../utils/i18n';
+
 interface RequestBodyProps {
   examples: ReadonlyArray<INodeExample | INodeExternalExample>;
   requestBody: string;
@@ -18,7 +20,7 @@ export const RequestBody: React.FC<RequestBodyProps> = ({ examples, requestBody,
           examples.length > 1 && <ExampleMenu examples={examples} requestBody={requestBody} onChange={onChange} />
         }
       >
-        Body
+        {t('sl_Body')}
       </Panel.Titlebar>
       <Panel.Content className="TextRequestBody">
         <CodeEditor
@@ -59,11 +61,11 @@ function ExampleMenu({ examples, requestBody, onChange }: RequestBodyProps) {
 
   return (
     <Menu
-      aria-label="Examples"
+      aria-label={t('sl_Examples')}
       items={menuItems}
       renderTrigger={({ isOpen }) => (
         <Button appearance="minimal" size="sm" iconRight={['fas', 'sort']} active={isOpen}>
-          Examples
+          {t('sl_Examples')}
         </Button>
       )}
     />

@@ -1,6 +1,7 @@
 import { Panel } from '@stoplight/mosaic';
 import * as React from 'react';
 
+import { t } from '../../../utils/i18n';
 import { ParameterSpec } from './parameter-utils';
 import { ParameterEditor } from './ParameterEditor';
 
@@ -19,7 +20,7 @@ export const OperationParameters: React.FC<OperationParametersProps> = ({
 }) => {
   return (
     <Panel defaultIsOpen>
-      <Panel.Titlebar>Parameters</Panel.Titlebar>
+      <Panel.Titlebar>{t('sl_Parameters')}</Panel.Titlebar>
       <Panel.Content className="sl-overflow-y-auto ParameterGrid OperationParametersContent">
         {parameters.map(parameter => (
           <ParameterEditor

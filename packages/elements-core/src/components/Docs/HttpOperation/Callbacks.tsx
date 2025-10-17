@@ -2,6 +2,8 @@ import { Box, Flex, NodeAnnotation, Select, VStack } from '@stoplight/mosaic';
 import { IHttpCallbackOperation } from '@stoplight/types';
 import * as React from 'react';
 
+import { t } from '../../../utils/i18n';
+
 import { useOptionsCtx } from '../../../context/Options';
 import { MarkdownViewer } from '../../MarkdownViewer';
 import { ExtensionAddonRenderer } from '../Docs';
@@ -28,7 +30,7 @@ export const Callbacks = ({ callbacks, isCompact }: CallbacksProps) => {
 
   return (
     <VStack spacing={8}>
-      <SectionTitle title="Callbacks" isCompact={isCompact}>
+      <SectionTitle title={t('sl_Callbacks')} isCompact={isCompact}>
         {callbacks.length > 0 && (
           <Flex flex={1} justify="end">
             <Select

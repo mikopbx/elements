@@ -5,6 +5,7 @@ import * as React from 'react';
 import formatXml from 'xml-formatter';
 
 import { HttpCodeDescriptions } from '../../../constants';
+import { t } from '../../../utils/i18n';
 import { getHttpCodeColor } from '../../../utils/http';
 import { ResponseCodeViewer } from './ReponseCodeViewer';
 
@@ -75,7 +76,7 @@ export const TryItResponse: React.FC<{ response: ResponseState }> = ({ response 
           bodyFormats.length > 1 && <ResponseMenu types={bodyFormats} type={bodyFormat} onChange={setBodyFormat} />
         }
       >
-        Response
+        {t('sl_Response')}
       </Panel.Titlebar>
       <Panel.Content>
         <div>
@@ -98,7 +99,7 @@ export const TryItResponse: React.FC<{ response: ResponseState }> = ({ response 
           ) : !response.bodyText ? null : (
             <p>
               <Box as={Icon} icon={['fas', 'exclamation-circle']} mr={2} />
-              No supported response body returned
+              {t('sl_NoSupportedResponseBody')}
             </p>
           )}
         </div>
@@ -124,11 +125,11 @@ const ResponseMenu: React.FC<{
 
   return (
     <Menu
-      aria-label="Body Format"
+      aria-label={t('sl_BodyFormat')}
       items={menuItems}
       renderTrigger={({ isOpen }) => (
         <Button appearance="minimal" size="sm" iconRight={['fas', 'sort']} active={isOpen}>
-          {capitalize(type)}
+          {type === 'preview' ? t('sl_Preview') : t('sl_Raw')}
         </Button>
       )}
     />
@@ -137,7 +138,7 @@ const ResponseMenu: React.FC<{
 
 export const ResponseError: React.FC<{ state: ErrorState }> = ({ state: { error } }) => (
   <Panel defaultIsOpen>
-    <Panel.Titlebar>Error</Panel.Titlebar>
+    <Panel.Titlebar>{t('sl_Error')}</Panel.Titlebar>
     <Panel.Content>{isNetworkError(error) ? <NetworkErrorMessage /> : <p>{error.message}</p>}</Panel.Content>
   </Panel>
 );
@@ -145,22 +146,22 @@ export const ResponseError: React.FC<{ state: ErrorState }> = ({ state: { error 
 const NetworkErrorMessage = () => (
   <>
     <p className="sl-pb-2">
-      <strong>Network Error occurred.</strong>
+      <strong>{t('sl_NetworkError')}</strong>
     </p>
 
-    <p className="sl-pb-2">1. Double check that your computer is connected to the internet.</p>
+    <p className="sl-pb-2">{t('sl_NetworkErrorStep1')}</p>
 
-    <p className="sl-pb-2">2. Make sure the API is actually running and available under the specified URL.</p>
+    <p className="sl-pb-2">{t('sl_NetworkErrorStep2')}</p>
 
     <p>
-      3. If you've checked all of the above and still experiencing issues, check if the API supports{' '}
+      {t('sl_NetworkErrorStep3')}{' '}
       <Link
         target="_blank"
         rel="noopener noreferrer"
         href="https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS"
         fontWeight="semibold"
       >
-        CORS
+        {t('sl_CORS')}
       </Link>
       .
     </p>

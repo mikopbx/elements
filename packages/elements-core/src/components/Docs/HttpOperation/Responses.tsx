@@ -24,6 +24,8 @@ import { IHttpOperationResponse } from '@stoplight/types';
 import { sortBy, uniqBy } from 'lodash';
 import * as React from 'react';
 
+import { t } from '../../../utils/i18n';
+
 import { useSchemaInlineRefResolver } from '../../../context/InlineRefResolver';
 import { useOptionsCtx } from '../../../context/Options';
 import { getOriginalObject } from '../../../utils/ref-resolving/resolvedObject';
@@ -93,14 +95,14 @@ export const Responses = ({
       </Button>
 
       <Modal
-        title="Response Code"
+        title={t('sl_ResponseCode')}
         isOpen={isOpen}
         onClose={close}
         size="sm"
         footer={
           <HStack justifyContent="end">
             <Button onPress={close} intent="default" appearance="primary">
-              Close
+              {t('sl_Close')}
             </Button>
           </HStack>
         }
@@ -142,7 +144,7 @@ export const Responses = ({
 
   return (
     <VStack spacing={8} as={Tabs} selectedId={activeResponseId} onChange={setActiveResponseId} appearance="pill">
-      <SectionTitle title="Responses" isCompact={isCompact}>
+      <SectionTitle title={t('sl_Responses')} isCompact={isCompact}>
         {isCompact ? compactResponses : tabResponses}
       </SectionTitle>
 
@@ -189,17 +191,17 @@ const Response = ({ response, onMediaTypeChange }: ResponseProps) => {
 
       {headers.length > 0 && (
         <VStack spacing={5}>
-          <SectionSubtitle title="Headers" id="response-headers" />
+          <SectionSubtitle title={t('sl_Headers')} id="response-headers" />
           <Parameters parameterType="header" parameters={headers} />
         </VStack>
       )}
 
       {contents.length > 0 && (
         <>
-          <SectionSubtitle title="Body" id="response-body">
+          <SectionSubtitle title={t('sl_Body')} id="response-body">
             <Flex flex={1} justify="end">
               <Select
-                aria-label="Response Body Content Type"
+                aria-label={t('sl_ResponseBodyContentType')}
                 value={String(chosenContent)}
                 onChange={value => setChosenContent(parseInt(String(value), 10))}
                 options={contents.map((content, index) => ({ label: content.mediaType, value: index }))}

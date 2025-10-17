@@ -4,6 +4,7 @@ import type { IServer } from '@stoplight/types';
 import { useAtom } from 'jotai';
 import * as React from 'react';
 
+import { t } from '../../../utils/i18n';
 import { getServerUrlWithVariableValues } from '../../../utils/http-spec/IServer';
 import { chosenServerAtom } from '../chosenServer';
 import { useServerVariables } from './useServerVariables';
@@ -19,7 +20,7 @@ export const ServersDropdown = ({ servers }: ServersDropdownProps) => {
   const serverItems: MenuItem[] = [
     {
       type: 'option_group',
-      title: 'Servers',
+      title: t('sl_Servers'),
       value: chosenServer?.url || '',
       onChange: url => {
         const server = servers.find(server => server.url === url);
@@ -38,12 +39,12 @@ export const ServersDropdown = ({ servers }: ServersDropdownProps) => {
 
   return (
     <Menu
-      aria-label="Server"
+      aria-label={t('sl_Server')}
       items={serverItems}
       closeOnPress
       renderTrigger={({ isOpen }) => (
         <FieldButton icon={faServer} size="sm" active={isOpen}>
-          {chosenServer?.description || 'Server'}
+          {chosenServer?.description || t('sl_Server')}
         </FieldButton>
       )}
     />

@@ -7,6 +7,7 @@ import * as React from 'react';
 import { HttpMethodColors } from '../../constants';
 import { isHttpOperation, isHttpWebhookOperation } from '../../utils/guards';
 import { getServersToDisplay, getServerVariables } from '../../utils/http-spec/IServer';
+import { t } from '../../utils/i18n';
 import { extractCodeSamples, RequestSamples } from '../RequestSamples';
 import { TryItAuth } from './Auth/Auth';
 import { usePersistedSecuritySchemeWithValues } from './Auth/authentication-utils';
@@ -309,7 +310,7 @@ export const TryIt: React.FC<TryItProps> = ({
         <Panel.Content className="SendButtonHolder" pt={!isOnlySendButton && !embeddedInMd ? 0 : undefined}>
           <HStack alignItems="center" spacing={2}>
             <Button appearance="primary" loading={loading} disabled={loading} onPress={handleSendRequest} size="sm">
-              Send API Request
+              {t('sl_SendAPIRequest')}
             </Button>
 
             {servers.length > 1 && <ServersDropdown servers={servers} />}
