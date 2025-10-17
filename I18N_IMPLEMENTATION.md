@@ -159,6 +159,11 @@ import { t } from '@stoplight/elements-core/utils/i18n';
 - `sl_Callbacks` - "Обратные вызовы"
 - `sl_MockSettings` - "Настройки имитации"
 
+#### Безопасность (Security):
+- `sl_SecurityColon` - "Безопасность:"
+- `sl_ExampleColon` - "Пример:"
+- `sl_RolesColon` - "Роли:"
+
 #### Валидации схем (из @stoplight/json-schema-viewer):
 - `sl_Required` - "обязательный"
 - `sl_ReadOnly` - "только для чтения"
@@ -171,7 +176,7 @@ import { t } from '@stoplight/elements-core/utils/i18n';
 - `sl_Default` - "По умолчанию"
 - `sl_Style` - "Стиль"
 
-**Всего ключей:** 70+
+**Всего ключей:** 73+
 
 ## Примеры использования
 
