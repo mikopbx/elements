@@ -1,8 +1,49 @@
 diff --git a/node_modules/@stoplight/json-schema-viewer/index.js b/node_modules/@stoplight/json-schema-viewer/index.js
-index 1234567..abcdefg 100644
+index bace2a0..8ed8496 100644
 --- a/node_modules/@stoplight/json-schema-viewer/index.js
 +++ b/node_modules/@stoplight/json-schema-viewer/index.js
-@@ -658,10 +658,11 @@ const useHasProperties = ({ required, deprecated, validations: { readOnly, writ
+@@ -468,22 +468,33 @@ const createStringFormatter = (nowrap) => (value) => {
+     return nowrap && typeof value === 'string' ? value : JSON.stringify(value);
+ };
+ const createValidationsFormatter = (name, options) => (value) => {
++    const t = (key) => typeof i18n === 'function' ? i18n(key) : key;
++    const pluralMap = {
++        'sl_AllowedValue': 'sl_AllowedValues',
++        'sl_Example': 'sl_Examples'
++    };
+     const values = Array.isArray(value) ? value : [value];
+     if (values.length) {
++        let displayName = name;
++        if (!(options === null || options === void 0 ? void 0 : options.exact)) {
++            if (values.length > 1 && pluralMap[name]) {
++                displayName = pluralMap[name];
++            }
++        }
+         return {
+-            name: (options === null || options === void 0 ? void 0 : options.exact) ? name : values.length > 1 ? `${name}s` : `${name}`,
++            name: t(displayName),
+             values: values.map(createStringFormatter(options === null || options === void 0 ? void 0 : options.nowrap)),
+         };
+     }
+     return null;
+ };
+ const validationFormatters = {
+-    enum: createValidationsFormatter('Allowed value', { nowrap: true }),
+-    examples: createValidationsFormatter('Example', { nowrap: true }),
+-    multipleOf: createValidationsFormatter('Multiple of', { exact: true }),
+-    pattern: createValidationsFormatter('Match pattern', { exact: true, nowrap: true }),
+-    default: createValidationsFormatter('Default', { exact: true, nowrap: true }),
+-    style: createValidationsFormatter('Style', { exact: true, nowrap: true }),
++    enum: createValidationsFormatter('sl_AllowedValue', { nowrap: true }),
++    examples: createValidationsFormatter('sl_Example', { nowrap: true }),
++    multipleOf: createValidationsFormatter('sl_MultipleOf', { exact: true }),
++    pattern: createValidationsFormatter('sl_MatchPattern', { exact: true, nowrap: true }),
++    default: createValidationsFormatter('sl_Default', { exact: true, nowrap: true }),
++    style: createValidationsFormatter('sl_Style', { exact: true, nowrap: true }),
+ };
+ const oasFormats = {
+     int32: {
+@@ -658,11 +669,12 @@ const useHasProperties = ({ required, deprecated, validations: { readOnly, write
  const Properties = ({ required, deprecated, validations: { readOnly, writeOnly }, }) => {
      const { viewMode } = useJSVOptionsContext();
      const showVisibilityValidations = viewMode === 'standalone' && !!readOnly !== !!writeOnly;
@@ -15,12 +56,54 @@ index 1234567..abcdefg 100644
 -        required && (React__namespace.createElement(mosaic.Box, { as: "span", ml: 2, color: "warning", "data-test": "property-required" }, "required"))));
 +        required && (React__namespace.createElement(mosaic.Box, { as: "span", ml: 2, color: "warning", "data-test": "property-required" }, t('sl_Required')))));
  };
-
+ 
+ function calculateChoiceTitle(node, isPlural) {
 diff --git a/node_modules/@stoplight/json-schema-viewer/index.mjs b/node_modules/@stoplight/json-schema-viewer/index.mjs
-index 7890123..fedcba9 100644
+index ea5a793..8b690ef 100644
 --- a/node_modules/@stoplight/json-schema-viewer/index.mjs
 +++ b/node_modules/@stoplight/json-schema-viewer/index.mjs
-@@ -637,10 +637,11 @@ const useHasProperties = ({ required, deprecated, validations: { readOnly, writ
+@@ -447,22 +447,33 @@ const createStringFormatter = (nowrap) => (value) => {
+     return nowrap && typeof value === 'string' ? value : JSON.stringify(value);
+ };
+ const createValidationsFormatter = (name, options) => (value) => {
++    const t = (key) => typeof i18n === 'function' ? i18n(key) : key;
++    const pluralMap = {
++        'sl_AllowedValue': 'sl_AllowedValues',
++        'sl_Example': 'sl_Examples'
++    };
+     const values = Array.isArray(value) ? value : [value];
+     if (values.length) {
++        let displayName = name;
++        if (!(options === null || options === void 0 ? void 0 : options.exact)) {
++            if (values.length > 1 && pluralMap[name]) {
++                displayName = pluralMap[name];
++            }
++        }
+         return {
+-            name: (options === null || options === void 0 ? void 0 : options.exact) ? name : values.length > 1 ? `${name}s` : `${name}`,
++            name: t(displayName),
+             values: values.map(createStringFormatter(options === null || options === void 0 ? void 0 : options.nowrap)),
+         };
+     }
+     return null;
+ };
+ const validationFormatters = {
+-    enum: createValidationsFormatter('Allowed value', { nowrap: true }),
+-    examples: createValidationsFormatter('Example', { nowrap: true }),
+-    multipleOf: createValidationsFormatter('Multiple of', { exact: true }),
+-    pattern: createValidationsFormatter('Match pattern', { exact: true, nowrap: true }),
+-    default: createValidationsFormatter('Default', { exact: true, nowrap: true }),
+-    style: createValidationsFormatter('Style', { exact: true, nowrap: true }),
++    enum: createValidationsFormatter('sl_AllowedValue', { nowrap: true }),
++    examples: createValidationsFormatter('sl_Example', { nowrap: true }),
++    multipleOf: createValidationsFormatter('sl_MultipleOf', { exact: true }),
++    pattern: createValidationsFormatter('sl_MatchPattern', { exact: true, nowrap: true }),
++    default: createValidationsFormatter('sl_Default', { exact: true, nowrap: true }),
++    style: createValidationsFormatter('sl_Style', { exact: true, nowrap: true }),
+ };
+ const oasFormats = {
+     int32: {
+@@ -637,11 +648,12 @@ const useHasProperties = ({ required, deprecated, validations: { readOnly, write
  const Properties = ({ required, deprecated, validations: { readOnly, writeOnly }, }) => {
      const { viewMode } = useJSVOptionsContext();
      const showVisibilityValidations = viewMode === 'standalone' && !!readOnly !== !!writeOnly;
@@ -33,3 +116,5 @@ index 7890123..fedcba9 100644
 -        required && (React.createElement(Box, { as: "span", ml: 2, color: "warning", "data-test": "property-required" }, "required"))));
 +        required && (React.createElement(Box, { as: "span", ml: 2, color: "warning", "data-test": "property-required" }, t('sl_Required')))));
  };
+ 
+ function calculateChoiceTitle(node, isPlural) {

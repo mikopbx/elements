@@ -159,7 +159,19 @@ import { t } from '@stoplight/elements-core/utils/i18n';
 - `sl_Callbacks` - "Обратные вызовы"
 - `sl_MockSettings` - "Настройки имитации"
 
-**Всего ключей:** 60+
+#### Валидации схем (из @stoplight/json-schema-viewer):
+- `sl_Required` - "обязательный"
+- `sl_ReadOnly` - "только для чтения"
+- `sl_WriteOnly` - "только для записи"
+- `sl_Deprecated` - "устарело"
+- `sl_AllowedValue` - "Допустимое значение"
+- `sl_AllowedValues` - "Допустимые значения"
+- `sl_MultipleOf` - "Кратно"
+- `sl_MatchPattern` - "Соответствует шаблону"
+- `sl_Default` - "По умолчанию"
+- `sl_Style` - "Стиль"
+
+**Всего ключей:** 70+
 
 ## Примеры использования
 
@@ -342,16 +354,29 @@ t('sl_RequestSample', { languageName: 'cURL' })
 
 **Файл патча:** `/patches/@stoplight+json-schema-viewer+4.16.3.patch`
 
-**Изменённые строки:**
-- `"required"` → `t('sl_Required')` - "обязательный"
-- `"read-only"` → `t('sl_ReadOnly')` - "только для чтения"
+**Изменённые компоненты:**
+
+1. **Компонент Properties** - свойства схем:
+   - `"required"` → `t('sl_Required')` - "обязательный"
+   - `"read-only"` → `t('sl_ReadOnly')` - "только для чтения"
+   - `"write-only"` → `t('sl_WriteOnly')` - "только для записи"
+   - `"deprecated"` → `t('sl_Deprecated')` - "устарело"
+
+2. **Функция createValidationsFormatter** - валидации:
+   - `"Allowed value"` → `t('sl_AllowedValue')` - "Допустимое значение"
+   - `"Example"` → `t('sl_Example')` - "Пример"
+   - `"Multiple of"` → `t('sl_MultipleOf')` - "Кратно"
+   - `"Match pattern"` → `t('sl_MatchPattern')` - "Соответствует шаблону"
+   - `"Default"` → `t('sl_Default')` - "По умолчанию"
+   - `"Style"` → `t('sl_Style')` - "Стиль"
+   - Добавлен `pluralMap` для правильного формирования множественного числа
 
 **Применение патча:**
-Патч автоматически применяется к файлам `index.js` и `index.mjs` в `node_modules/@stoplight/json-schema-viewer/`.
+Патч модифицирует файлы `index.js` и `index.mjs` в `node_modules/@stoplight/json-schema-viewer/`.
 
-Изменения добавляют локальную функцию `t()` в компонент `Properties`, которая проверяет доступность глобальной функции `i18n()` и использует её для перевода.
+Изменения добавляют локальную функцию `t()`, которая проверяет доступность глобальной функции `i18n()` и использует её для перевода.
 
-**Примечание:** После `yarn install` может потребоваться повторное применение патча, если используется пакет patch-package.
+**Важно:** Патч должен применяться вручную или с помощью patch-package после `yarn install`. В данном проекте патчи применяются вручную, так как пакет patch-package не настроен.
 
 ## Известные ограничения
 
