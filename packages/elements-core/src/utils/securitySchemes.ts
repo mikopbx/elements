@@ -51,7 +51,7 @@ function getApiKeyDescription(scheme: IApiKeySecurityScheme) {
   const { in: inProperty, name } = scheme;
   return `An API key is a token that you provide when making API calls. Include the token in a ${inProperty} parameter called \`${name}\`.
 
-  Example: ${inProperty === 'query' ? `\`?${name}=123\`` : `\`${name}: 123\``}${getSecuritySchemeRoles(scheme)}`;
+  ${t('sl_ExampleColon')} ${inProperty === 'query' ? `\`?${name}=123\`` : `\`${name}: 123\``}${getSecuritySchemeRoles(scheme)}`;
 }
 
 function getBasicAuthDescription(schema: IBasicSecurityScheme) {
@@ -59,19 +59,19 @@ function getBasicAuthDescription(schema: IBasicSecurityScheme) {
   To use it, send your HTTP requests with an Authorization header that contains the word Basic
   followed by a space and a base64-encoded string \`username:password\`.
 
-  Example: \`Authorization: Basic ZGVtbzpwQDU1dzByZA==\`${getSecuritySchemeRoles(schema)}`;
+  ${t('sl_ExampleColon')} \`Authorization: Basic ZGVtbzpwQDU1dzByZA==\`${getSecuritySchemeRoles(schema)}`;
 }
 
 function getBearerAuthDescription(schema: IBearerSecurityScheme) {
   return `${t('sl_ProvideBearerToken')}
 
-  Example: \`Authorization: Bearer 123\`${getSecuritySchemeRoles(schema)}`;
+  ${t('sl_ExampleColon')} \`Authorization: Bearer 123\`${getSecuritySchemeRoles(schema)}`;
 }
 
 function getDigestAuthDescription(schema: IBasicSecurityScheme) {
   return `Provide your encrypted digest scheme data in the Authorization header when making requests to protected resources.
 
-  Example: \`Authorization: Digest username=guest, realm="test", nonce="2", uri="/uri", response="123"\`${getSecuritySchemeRoles(
+  ${t('sl_ExampleColon')} \`Authorization: Digest username=guest, realm="test", nonce="2", uri="/uri", response="123"\`${getSecuritySchemeRoles(
     schema,
   )}`;
 }
@@ -114,5 +114,5 @@ ${scopes.map(([key, value]) => `- \`${key}\` - ${value}`).join('\n')}`;
 
 function getSecuritySchemeRoles(scheme: HttpSecurityScheme) {
   const scopes = scheme.extensions?.['x-scopes'];
-  return Array.isArray(scopes) ? `\n\nRoles: ${scopes.map(scope => `\`${scope}\``).join(', ')}` : '';
+  return Array.isArray(scopes) ? `\n\n${t('sl_RolesColon')} ${scopes.map(scope => `\`${scope}\``).join(', ')}` : '';
 }

@@ -99,7 +99,7 @@ const SecurityPanel: React.FC<{ schemes: HttpSecurityScheme[]; includeKey: boole
 
   return (
     <SubSectionPanel
-      title={`Security: ${getReadableSecurityNames(schemes, includeKey)}`}
+      title={`${t('sl_SecurityColon')} ${getReadableSecurityNames(schemes, includeKey)}`}
       defaultIsOpen={!!expandedState[getReadableSecurityNames(schemes)]}
       onChange={isOpen => setExpanded({ ...expandedState, [getReadableSecurityNames(schemes)]: isOpen })}
     >
